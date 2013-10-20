@@ -1,0 +1,14 @@
+/*-----------------------------------------------------------------------------------*/
+/*	   	body , basics
+/*-----------------------------------------------------------------------------------*/
+.row-fluid [class*="span"] {float: right;}
+.row-fluid [class*="span"] {margin-left: 1%;}
+/*#frontpage_facebook {width: 350px;}*/
+#frontpage_facebook {}
+.tbox {width : auto;}
+.admin_label{float: left;}
+.row-fluid [class*="span"]:first-child {margin-left: 1%;}
+.border-bottom {border-color: #D8D8D8 !important;border-image: none;border-radius: 0 0 0 0;border-style: dotted;border-width: 0 0 1px 0 ;}
+
+.nav-list>li>a:active{background-color:#000;color:#1963aa}
+/*** Iphone Style ***/
