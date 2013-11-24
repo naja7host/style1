@@ -63,7 +63,7 @@
 						</div>
 						{NEWSTITLELINK=extend}
 						<div class='nb2_meta'>
-							<span class='news_date'>{NEWSSUMMARY}</span>
+							<span class=' news_date'>{NEWSSUMMARY}</span>
 						</div>
 					</li>
 					";

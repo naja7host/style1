@@ -1,0 +1,95 @@
+/*
+	======================================================================
+		MAIN PAGE
+		NAJA7HOST
+		BLUE STYLE
+	======================================================================
+*/
+
+body { background: #4477cc; }
+a {}
+a:hover , a:focus {}
+.container {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-left: 1px solid #FFFFFF;
+    border-right: 1px solid #FFFFFF;
+    box-shadow: 0 0 6px #333333 !important;
+}
+/**** Header ***/
+#header {}
+.header-top {background: none repeat scroll 0 0 #F9FAFA;}
+.navbar-inverse  .navbar-inner {}
+
+/**** nav bar ***/
+.navbar-default {}
+.navbar-default .nav > li > a{color: #000;text-decoration: none;}
+.navbar-default .nav > li > a:hover, .navbar-default .nav > li > a:focus {color:#000 ;background-color: #5997CC;}
+
+.nav-container  {background: none repeat scroll 0 0 #4477CC;}
+.nav-container  .nav > li > a:hover, .navbar .nav > li >  a:focus {background-color: #5997CC;text-decoration: none;}
+.nav-container  .nav li{border-left: 1px solid #4868A0;border-right: 1px solid #5283D9;}
+
+.breaking-title {background-color: #5283D9;}
+.tickercontainer {background: none repeat scroll 0 0 #C6DAE9;}
+.tickercontainer a{color: #c12424;}
+	
+/**** Slider ***/	
+.slider_item h2 a {color: #A50000;}
+.slider_item h2 a:hover {color:#e23024;}
+ul.slider_nav li.activeSlide a img {border:4px solid  rgb(82, 131, 217);}
+
+/*** Box Tables ***/ 
+.title_box {background: none repeat scroll 0 0 #4477CC;color: #FFFFFF;text-shadow: 1px 1px 1px #333333;}
+.nb2_next2_news li:hover {background-color: #C6DAE9;}
+
+/*** News Page ***/
+.title-news {color: #054CB8;background-color: #C6DAE9;border-color: #A1BDD1;}
+article .item-list:hover {background-color: #C6DAE9;}
+.item-list-index:hover {background-color: #C6DAE9;}
+.noleft  .border_box .row:hover {background-color: #C6DAE9;}
+
+/*** Maalat ---/*/
+.nb2_next2_news li .nb2_meta span, .nb2_next2_news li .nb2_meta span a {color: #c0392b !important;}
+
+/*** Video ***/
+div.list-posts-video:hover {background-color: #C6DAE9;}
+
+/*** Views ***/
+ul.views li:hover {background: none repeat scroll 0 0 #C6DAE9;}
+
+/*** Views ***/
+aside .border_box .news_titlelink:hover {background: none repeat scroll 0 0 #C6DAE9;}
+
+/*** Footer ***/ 
+.footer a{}
+.news-extended-category-link:hover, .news-extended-overview-link:hover , .news-extended-older  a:hover , .news-extended-newer a:hover , .news-back-overview:hover{background-color: #C6DAE9;}
+
+/*** Buttons ***/
+.btn-send {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #5bb75b;
+  *background-color: #51a351;
+  background-image: -moz-linear-gradient(top, #62c462, #51a351);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462), to(#51a351));
+  background-image: -webkit-linear-gradient(top, #62c462, #51a351);
+  background-image: -o-linear-gradient(top, #62c462, #51a351);
+  background-image: linear-gradient(to bottom, #62c462, #51a351);
+  background-repeat: repeat-x;
+  border-color: #51a351 #51a351 #387038;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff62c462', endColorstr='#ff51a351', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+.btn-send:hover,.btn-send:focus,.btn-send:active,.btn-send.active,.btn-send.disabled,.btn-send[disabled] {color: #ffffff;background-color: #51a351;*background-color: #499249;}
+
+/*** Side Icons ***/ 
+#comments:hover {background-color: #dff0d8;background-image: none;}
+
+/*** left-side admin ***/
+.notification {background-color: #FA603D;background-image: -moz-linear-gradient(center top , #FB9C87, #FA5F3D);border-color: #FA5833;}
+#ta-Settings span {background: url("../../images/icons-blue32.png") transparent;background-position: 0px -192px;}
+#ta-comments span {background: url("../../images/icons-blue32.png") transparent;background-position: -223px -256px;}
+#ta-Settings span:hover {background: url("../../images/icons-darkgray32.png") transparent;background-position: 0px -192px;}
+#ta-comments span:hover {background: url("../../images/icons-darkgray32.png") transparent;background-position: -223px -256px;}

@@ -1,0 +1,130 @@
+#featured {
+    background:#fff;
+    border: 1px solid #DDDDDD;
+	box-shadow: 0px 3px 8px #ddd;
+    height: 326px !important;
+    margin:0 0 10px;
+    overflow: hidden;
+    position: relative;
+    width: 628px !important;
+	
+}
+#featured ul.ui-tabs-nav {
+	background: url("../../images/menubg.jpg") repeat-x scroll 0 0 transparent;
+    color: #FFFFFF;
+    list-style: none outside none;
+    margin: 0;
+    outline: medium none;
+    padding: 4px 3px;
+    position: absolute;
+    width: 625px;
+}
+#featured ul.ui-tabs-nav li {
+    background:transparent;
+    color: #666666;
+    float: right;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+#featured ul.ui-tabs-nav li img {
+    background:#FFFFFF;
+    border: 0 solid #EEEEEE;
+    float: right;
+    height: 55px;
+    margin: 0;
+    outline: medium none;
+    padding: 5px;
+    width: 82px;
+}
+#featured li.ui-tabs-nav-item a {
+    color: #666666;
+    display: block;
+    outline: medium none;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+#featured li.ui-tabs-nav-item a:hover {
+    background-position: 0 -89px;
+}
+#featured li.ui-tabs-selected {
+    outline: medium none;
+    padding: 0 0 1px;
+}
+#featured ul.ui-tabs-nav li.ui-tabs-selected a {
+    background:#222222;
+    color: #FFFFFF;
+}
+#featured .ui-tabs-panel {
+    background:#fff;
+    height: 280px;
+    overflow: hidden;
+    padding: 5px;
+    position: relative;
+    width: 619px;
+    z-index: 1;
+}
+#featured .ui-tabs-panel img {
+    background:#FFFFFF;
+    float: left;
+    height: 280px;
+    width: 348px;
+}
+#featured .ui-tabs-panel .info {
+    background:#222222;
+    height: 280px;
+    overflow: hidden;
+    position: absolute;
+    right: 4px;
+    top: 5px;
+    width: 270px;
+}
+#featured .cats {
+    position: absolute;
+    right: 4px;
+    top: 18px;
+	*padding:8px 0 6px 15px;
+	*top:10px;
+	_padding:8px 0 6px 15px;
+	_top:10px;
+}
+#featured .cats a {
+    background:#F7F7F7;
+    color: #000000;
+    text-decoration: none;
+	
+	padding: 2px 15px 1px 10px;	
+}
+#featured .cats a:hover {
+    text-decoration: none;
+}
+#featured .info div {
+    color: #F2F2F2;
+    float: right;
+    margin: 0 3px;
+    padding: 8px 5px 5px;
+    text-align: justify;
+	height: 119px;
+	overflow:hidden;
+}
+#featured .info div a {
+    background:#555555;
+    color: #FFFFFF;
+    float: left;
+    padding: 3px 5px;
+    text-decoration: none;
+}
+#featured .info h2, #featured .info h2 a {
+    color: #F2F2F2;
+    display: inline-block;
+    margin-top: 20px;
+    padding: 5px 3px 0;
+    text-align: right;
+    text-decoration: none;
+}
+#featured .info h2 a:hover {
+    text-decoration: underline;
+}
+#featured .ui-tabs-hide {
+    display: none;
+}

@@ -65,7 +65,7 @@ if (isset($pref['plug_installed']['ytm_gallery']))
 			if ( $store_seo == 1 ) 
 			  // Display Gallery with full information above
 			  $ytm_text .= "
-				<div class='list-posts-video' >
+				<div class=' list-posts-video' >
 					<div>
 						<a href='" . SITEURL . "video/show/$movie_code.html' title='$movie_title' >
 							<img class='videoplay' src='http://i.ytimg.com/vi/$movie_code/0.jpg' alt='$movie_title' style='border:0;'  />
@@ -79,7 +79,7 @@ if (isset($pref['plug_installed']['ytm_gallery']))
 
 			else 
 				$ytm_text .= "
-				<div class='list-posts-video' >
+				<div class=' list-posts-video' >
 					<div>					
 						<a href='" . e_PLUGIN."ytm_gallery/ytm.php?view=$movie_code' title='$movie_title' >
 							<img  class='videoplay' src='http://i.ytimg.com/vi/$movie_code/0.jpg' alt='$movie_title' style='border:0;' />
@@ -94,9 +94,9 @@ if (isset($pref['plug_installed']['ytm_gallery']))
 		}
 		
 		if ( $store_seo == 1 ) 	
-			$ytm_text .= "<div class='more-video ' ><a href='" . e_HTTP . "video/list/' title='".LAN_YTM_PLUGIN_9."' >" . LAN_YTM_PLUGIN_9 . "</a></div>";
+			$ytm_text .= "<div class='more-video ' ><a href='" . e_HTTP . "video/list/' title='".LAN_YTM_PLUGIN_9."' >" . LAN_YTM_PLUGIN_9 . "</a></div><div class='clearfix'></div>	";
 		else 
-			$ytm_text .= "<div class='more-video ' ><a href='" . e_PLUGIN."ytm_gallery/ytm.php' title='".LAN_YTM_PLUGIN_9."' >" . LAN_YTM_PLUGIN_9 . "</a></div>";	
+			$ytm_text .= "<div class='more-video ' ><a href='" . e_PLUGIN."ytm_gallery/ytm.php' title='".LAN_YTM_PLUGIN_9."' >" . LAN_YTM_PLUGIN_9 . "</a></div><div class='clearfix'></div>	";	
 			
 
 		if ( $store_seo == 1 ) 	

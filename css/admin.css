@@ -1,8 +1,10 @@
 /*-----------------------------------------------------------------------------------*/
 /*	   	body , basics
 /*-----------------------------------------------------------------------------------*/
-.row-fluid [class*="span"] {float: right;}
-.row-fluid [class*="span"] {margin-left: 1%;}
+
+/**** nav bar ***/
+.navbar-default .nav > li > a:hover, .navbar-default .nav > li > a:focus {color:#000 ;background-color: rgb(231, 231, 231);}
+
 /*#frontpage_facebook {width: 350px;}*/
 #frontpage_facebook {}
 .tbox {width : auto;}

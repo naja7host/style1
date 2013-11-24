@@ -18,45 +18,27 @@ if (!getperms("P"))
 }
 function core_head() {
 
-	$headerstyle ='
-		<!--basic styles-->
-		<link href="css/bootstrap.min.css" rel="stylesheet" />
-		<link href="css/bootstrap-responsive.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="'.THEME_ABS.'themes/font-awesome/css/font-awesome.min.css" />
-		<!--[if IE 7]>
-		  <link rel="stylesheet" href="'.THEME_ABS.'themes/font-awesome/css/font-awesome-ie7.min.css" />
-		<![endif]-->
-		<!--page specific plugin styles-->
-		<link rel="stylesheet" href="'.THEME_ABS.'themes/css/prettify.css" />
-		<!--fonts-->
-		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
-		<!--ace styles-->
-		<link rel="stylesheet" href="'.THEME_ABS.'themes/css/w8.min.css" />
-		<link rel="stylesheet" href="'.THEME_ABS.'themes/css/w8-responsive.min.css" />
-		<link rel="stylesheet" href="'.THEME_ABS.'themes/css/w8-skins.min.css" />
-		<!--e107 styles-->
-		<link rel="stylesheet" href="'.THEME_ABS.'css/admin.css" />	
-		<!--[if lte IE 8]>
-		  <link rel="stylesheet" href="'.THEME_ABS.'themes/css/ace-ie.min.css" />
-		<![endif]-->
-		<script type="text/javascript" charset="utf-8">
-		//<![CDATA[
-		jQuery(function() {
-		  jQuery(".nav li").each(function() {
-			var href = jQuery(this).find("a").attr("href");
-			if (href === window.location.pathname) {
-			  jQuery(this).addClass("active");
-			}
-		  });
-		});  
-		//]]>
-		</script>		
-		
-		';	
+	$headerstyle ='	
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="'.THEME_ABS.'css/'.TEXTDIRECTION.'bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="'.THEME_ABS.'assets/js/html5shiv.js"></script>
+      <script src="'.THEME_ABS.'assets/js/respond.min.js"></script>
+    <![endif]-->
+	
+	<!--e107 styles-->
+	<link rel="stylesheet" href="'.THEME_ABS.'css/admin.css" />		
+	';
+	
 	if(defined("TEXTDIRECTION")){
-		$headerstyle .= "<link href='".THEME_ABS."css/".TEXTDIRECTION.".css' rel='stylesheet' />";
-		$headerstyle .= "<link href='".THEME_ABS."themes/css/w8-responsive-".TEXTDIRECTION.".min.css' rel='stylesheet' />";			
+		$headerstyle .= "<link href='".THEME_ABS."css/admin/".TEXTDIRECTION.".css' rel='stylesheet' />";
+		//$headerstyle .= "<link href='".THEME_ABS."css/".TEXTDIRECTION."-bootstrap.css' rel='stylesheet' media='screen' />";		
+		//$headerstyle .= '';		
 		}
+		
 	if(defined("FONTS"))
 		$headerstyle .= "<link href='".THEME_ABS."css/".FONTS.".css' rel='stylesheet' />";			
 		
@@ -90,18 +72,36 @@ include("shortcode/admin_header.php");
 		case 'fonts':
 			include("shortcode/admin_fonts.php");
 		break;	
+		case 'update':
+			include("shortcode/admin_update.php");
+		break;	
+		case 'slider':
+			include("shortcode/admin_slider.php");
+		break;	
+		case 'newspage':
+			include("shortcode/admin_newspage.php");
+		break;	
+		case 'urgent':
+			include("shortcode/admin_urgent.php");
+		break;	
+		case 'ads':
+			include("shortcode/admin_ads.php");
+		break;			
+		case 'promotion':
+			include("shortcode/admin_promotion.php");
+		break;			
 		case 'other':
 			include("shortcode/admin_other.php");
 		break;			
-		case 'readme':
-			include("shortcode/admin_readme.php");
+		case 'about':
+			include("shortcode/admin_about.php");
 		break;				
 	}				
 // 
 include("shortcode/admin_footer.php");
 // require_once(e_ADMIN."footer.php");
 
-$ns->tablerender(ADSTAT_L6, $text, "no_caption");
+$ns->tablerender("", $text, "no_caption");
 require_once(FOOTERF);
 
 ?>

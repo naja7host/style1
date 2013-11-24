@@ -7,25 +7,18 @@ html, body {
    direction: rtl;
 }
 
-.row-fluid .span4 .float_left {float: right;}
-.row-fluid .span8 .slideindex{float: right;}
 
 /*** Header ***/
 #Clock {text-align: right;}
-.breaking-title {float:right;padding-right: 10px;padding-left: 0;}
-.tickercontainer {text-align: right;}
-.logo{float:right;}
-.navbar .nav  {float: right;right: 0;text-align:right;margin: 0 ;}
-.navbar .nav li {float: right;}
 
 /*** News Page ***/
 .item-list .post-thumbnail {float: right;}
 .post-thumbnail {margin: 0 0 1px 10px;}
 .entry {line-height: 1.5;}
 /*** All ***/
-.row-fluid .span8{margin-left: 0.5%;margin-right: 1.5%;}
-.row-fluid .noleft {margin-left: 0%;margin-right: 1%;float: right;}
-.row {margin-left: 0px;}
+.body-content .span8{margin-left: 0.5%;margin-right: 1.5%;}
+.body-content .noleft {}
+.row {}
 .noleft {margin-left: 0px;}
 .span8 {margin-left: 2px;right:0}
 .span4{margin-left: 2px;}
@@ -33,7 +26,7 @@ html, body {
 .margins{margin-left:0.5%;margin-right:1%;}
 aside .margins{margin-left:2%;margin-right:1%;}
 aside .border_box .news_image{float: right;margin-left: 15px;margin-right: 0;}
-.newsbox_index, .row-fluid  .newsbox_index{float: right;margin-left: 0.5%;margin-right: 1.5%;}
+.newsbox_index, .body-content  .newsbox_index{float: right;margin-left: 0.5%;margin-right: 1.5%;}
 .news_box_index_image_thumb {float: right;}
 /*** ***/
 
@@ -65,35 +58,3 @@ ul.slider_nav li {float: right;margin-left: 10.1px;margin-right:0;}
 .comments-data {float: right;}
 .reply-btn {float: right;}
 .reply-text {float: right;}
-
-/*-----------------------------------------------------------------------------------*/
-/*	   	Admin , basics
-/*-----------------------------------------------------------------------------------*/
-#nav-search{float: left;left: 22px;right: auto;}
-#main-content {margin-right: 190px;margin-left: 0;min-height: 500px;}
-#sidebar.menu-min + #main-content {margin-right: 43px;}
-
-.icon-angle-right:before { content: "\f104";}
-.icon-double-angle-right:before {content: "\f100";}
-
-.menu-min .nav-list > li > a > span {right: 41px;left: auto;padding-right: 12px;padding-left: auto;}
-.nav-list > li > a {padding: 0 7px 0 16px;}
-.menu-min .nav-list > li.active > a > span {border-right-color: #1963AA;border-left-color: transparent;}
-
-.nav-list > li.active > a:after {border-color:   transparent transparent  transparent #0B6CBC;left: 0;right: auto;}
-.nav-list > li > a .arrow {right: auto;left: 9px;}
-
-.nav-list > li .submenu > li:before {left: auto;right: 21px;}
-.nav-list > li .submenu > li:after {border-left: 0;border-right: 1px dashed #B1C9E0;left: auto;right: 18px;}
-.nav-list > li .submenu > li a > [class*="icon-"]:first-child {right: 8px;left: auto;}
-.nav-list > li .submenu > li > a {padding: 7px 37px 8px 0;}
-.menu-min .nav-list > li > ul.submenu {right: 41px;left: auto;}
-
-.menu-min .nav-list>li.active>ul.submenu{border-right-color:#1963aa;border-left-color: transparent;}
-.widget-header > *:first-child {float: right;text-align: right;}
-
-.prettyprint.linenums {text-align: left;}
-
-.widget-toolbar:before {right: -1px;}
-.widget-toolbar {float: left;}
-.button-save{float: left;}

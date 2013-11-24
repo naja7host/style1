@@ -9,13 +9,6 @@
 |
 |     Released under the terms and conditions of the
 |     GNU General Public License (http://gnu.org).
-|
-|     $URL: https://e107.svn.sourceforge.net/svnroot/e107/trunk/e107_0.7/e107_plugins/poll/templates/poll_template.php $
-|     $Revision: 11678 $
-|     $Id: poll_template.php 11678 2010-08-22 00:43:45Z e107coders $
-|     $Author: e107coders $
-|
-+----------------------------------------------------------------------------+
 */
 
 if (!defined('e107_INIT')) { exit; }
@@ -26,19 +19,29 @@ if (!defined('e107_INIT')) { exit; }
 
 $POLL_NOTVOTED_START = "
 <div class='poll'>
-	<div class='question'>{QUESTION}</div>
-	<p>";
+	<div class='panel panel-default'>
+		<div class='panel-heading'>
+			<h3 class='panel-title'>{QUESTION}</h3>
+		</div>
+		<div class='panel-body'>
+			<p>";
 
 $POLL_NOTVOTED_LOOP = "
-	{OPTIONBUTTON} <label class='checkbox inline'> {OPTION} </label>";
+				<label class='checkbox radio' >{OPTIONBUTTON}  {OPTION} </label>";
 
 $POLL_NOTVOTED_END = "
-	</p>
-	<div style='text-align:center' class='smalltext'>
-		<p>
-		{SUBMITBUTTON}<br />
-		{AUTHOR} | {VOTE_TOTAL} | {COMMENTS} | {OLDPOLLS}
-		</p>
+			</p>
+			<div class='text-center'>
+				{SUBMITBUTTON}
+				<p></p>
+			</div>
+		</div>
+		<div class='panel-footer'>
+			<span class='badge'>{AUTHOR}</span> 
+			<span class='badge'>{VOTE_TOTAL}</span> 
+			<span class='badge'>{COMMENTS}</span> 
+			<span class='badge'>{OLDPOLLS}</span>	
+		</div>
 	</div>
 </div>";
 
@@ -48,22 +51,29 @@ $POLL_NOTVOTED_END = "
 
 $POLL_VOTED_START = "
 <div class='poll'>
-	<div class='btn btn-small disabled'>{QUESTION}</div>
-	<div class='clearfix'></div>
-	";
+	<div class='panel panel-default'>
+		<div class='panel-heading'>
+			<h3 class='panel-title'>{QUESTION}</h3>
+		</div>
+		<ul class='list-group'>";
 
 $POLL_VOTED_LOOP = "
-	<span class='label'>{OPTION} - {VOTES} | {PERCENTAGE}</span>
-	<div class='spacer'>{BAR}</div>
-	<div class='clearfix'></div>
+			<li class='list-group-item'>{OPTION} - {VOTES} <span class='badge pull-right '>  {PERCENTAGE}</span>
+				<div class='spacer'>{BAR}</div>
+				<div class='clearfix'></div>
+			</li>
 ";
 
 $POLL_VOTED_END = "
-	<div style='text-align:center' class='smalltext'>
-		<span class='badge badge-inverse'>{AUTHOR}</span><span class='badge badge-info'>{VOTE_TOTAL}</span><span class='badge badge-inverse'>{COMMENTS}</span><span class='badge badge-inverse'>{OLDPOLLS}</span>	
+		</ul>
+		<div class='panel-footer'>
+			<span class='badge'>{AUTHOR}</span> 
+			<span class='badge'>{VOTE_TOTAL}</span> 
+			<span class='badge'>{COMMENTS}</span> 
+			<span class='badge'>{OLDPOLLS}</span>	
+		</div>
 	</div>
-</div>	
-";
+</div>";
 
 
 /* ################################# */
@@ -72,23 +82,31 @@ $POLL_VOTED_END = "
 
 $POLL_DISALLOWED_START = "
 <div class='poll'>
-	<div class='question'>
-		{QUESTION}
-	</div>
-	<p><br /> ";
+	<div class='panel panel-default'>
+		<div class='panel-heading'>
+			<h3 class='panel-title'>{QUESTION}</h3>
+		</div>
+		<ul class='list-group'>";
 	
 $POLL_DISALLOWED_LOOP = "
-	{OPTIONBUTTON}<label for='{OPTION}'><span><span></span></span>{OPTION}</label>
-	<br />";
+			<li class='list-group-item'>
+				<label class='checkbox radio' >{OPTIONBUTTON}  {OPTION} </label>
+				<div class='clearfix'></div>
+			</li>";
 
 $POLL_DISALLOWED_END = "
-<div style='text-align:center' class='smalltext'>
-{DISALLOWMESSAGE}<br /><br />
-{VOTE_TOTAL} {COMMENTS}
-<br />
-{OLDPOLLS}
-</div>
-";
+		</ul>
+		<div class='alert alert-danger '>
+			{DISALLOWMESSAGE}
+		</div>		
+		<div class='panel-footer'>
+			<span class='badge'>{AUTHOR}</span> 
+			<span class='badge'>{VOTE_TOTAL}</span> 
+			<span class='badge'>{COMMENTS}</span> 
+			<span class='badge'>{OLDPOLLS}</span>	
+		</div>
+	</div>
+</div>";
 
 
 /* ################################# */
@@ -106,8 +124,8 @@ $POLL_FORUM_NOTVOTED_START = "
 <td class='forumheader3' style='width: 100%;'>";
 
 $POLL_FORUM_NOTVOTED_LOOP = "
-	{OPTIONBUTTON}<label for='{OPTION}'><span><span></span></span>{OPTION}</label>
-	<br />";
+	<label for='{OPTION}'>{OPTIONBUTTON}{OPTION}</label>
+	";
 
 $POLL_FORUM_NOTVOTED_END = "
 </td>

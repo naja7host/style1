@@ -8,7 +8,7 @@ return "
 var switchTo5x=true;
 </script>
 <script type='text/javascript' src='http://w.sharethis.com/button/buttons.js'></script>
-<script type='text/javascript'>stLight.options({publisher: 'f9486677-8446-4866-aa25-4ca8c5c98a7a'}); </script>
+<script type='text/javascript'>stLight.options({publisher: '8a31bf30-197a-4f30-9ea4-e62a0b3097e7'}); </script>
 <span class='st_facebook_vcount' displayText='Facebook'></span>
 <span class='st_twitter_vcount' displayText='Tweet'></span>
 <span class='st_linkedin_vcount' displayText='LinkedIn'></span>
@@ -17,6 +17,7 @@ var switchTo5x=true;
 <span class='st_fblike_vcount' displayText='Facebook Like'></span>
 <span class='st_digg_vcount' displayText='Digg'></span>
 <span class='st_sharethis_vcount' displayText='Share'></span>
+<span class='st_sharethis' st_via='".e_DOMAIN."'></span>
 <!-- AddThis Button END -->
 </fieldset>
 <!-- AddThis Button END -->

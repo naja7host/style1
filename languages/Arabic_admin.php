@@ -1,8 +1,8 @@
 <?php
 /*
 */
-define("LAN_THEME_ADMIN_1", "الستايل الإخباري - الشكل 1");
-define("LAN_THEME_ADMIN_2", "مرحبا ");
+define("LAN_THEME_ADMIN_1", " الستايل الإخباري - الشكل 1 ");
+define("LAN_THEME_ADMIN_2", " مرحبا ");
 define("LAN_THEME_ADMIN_3", "الإعدادات");
 define("LAN_THEME_ADMIN_4", "الملف الشخصي");
 define("LAN_THEME_ADMIN_5", "تسجيل الخروج");
@@ -10,26 +10,26 @@ define("LAN_THEME_ADMIN_6", "الموقع من تطوير و تصميم <a href=
 define("LAN_THEME_ADMIN_7", "الرئيسية");
 define("LAN_THEME_ADMIN_8", "الواجهة الرئيسية");
 define("LAN_THEME_ADMIN_9", "الكتابة و الخطوط");
-define("LAN_THEME_ADMIN_10", "ألوان الموقع");
+define("LAN_THEME_ADMIN_10", "ألوان الموقع و الستايلات");
 define("LAN_THEME_ADMIN_11", "إعدادات أخرى للرئيسية");
 define("LAN_THEME_ADMIN_12", "إعدادات ");
-define("LAN_THEME_ADMIN_13", "Treeview");
+define("LAN_THEME_ADMIN_13", "تحديث الستايل / القالب");
 define("LAN_THEME_ADMIN_14", "روابط المواقع الاجتماعية");
-define("LAN_THEME_ADMIN_15", "Forms");
-define("LAN_THEME_ADMIN_16", "Form Elements");
-define("LAN_THEME_ADMIN_17", "Wizard &amp; Validation");
-define("LAN_THEME_ADMIN_18", "Wysiwyg &amp; Markdown");
-define("LAN_THEME_ADMIN_19", "Widgets");
+define("LAN_THEME_ADMIN_15", " السلايدر");
+define("LAN_THEME_ADMIN_16", " خبر عاجل");
+define("LAN_THEME_ADMIN_17", " صفحة عرض الخبر ");
+define("LAN_THEME_ADMIN_18", " حول الستايل ");
+define("LAN_THEME_ADMIN_19", "  الإعلانات ");
 define("LAN_THEME_ADMIN_20", "لائحة التقويم");
 define("LAN_THEME_ADMIN_21", "لوجو و صور الموقع");
 define("LAN_THEME_ADMIN_22", "Grid");
 define("LAN_THEME_ADMIN_23", "صفحات أخرى");
 define("LAN_THEME_ADMIN_24", "Pricing Tables");
-define("LAN_THEME_ADMIN_25", "Invoice");
+define("LAN_THEME_ADMIN_25", " لوحة التحكم ");
 define("LAN_THEME_ADMIN_26", "التسجيل &amp; الدخول");
-define("LAN_THEME_ADMIN_27", "Error 404");
-define("LAN_THEME_ADMIN_28", "Error 500");
-define("LAN_THEME_ADMIN_29", "Blank Page");
+define("LAN_THEME_ADMIN_27", " التعليقات ");
+define("LAN_THEME_ADMIN_28", " الأخبار ");
+define("LAN_THEME_ADMIN_29", " مشاهدة الموقع ");
 
 define("LAN_THEME_ADMIN_30", "اشتراك ");
 define("LAN_THEME_ADMIN_31", " مقروء  ");
@@ -44,7 +44,7 @@ define("LAN_THEME_ADMIN_39", " ");
 
 //
 define('LAN_THEME_ADMIN_40', 'إعدادات الصفحة الرئيسية');
-define("LAN_THEME_ADMIN_41", "عدد الأخبار في الشريط  المتحرك - السلايدر :");
+define("LAN_THEME_ADMIN_41", "عدد  الاخبار في السلايدر :");
 define("LAN_THEME_ADMIN_42", "قسم اخر اخبار 24 :");
 define("LAN_THEME_ADMIN_43", " ");
 define("LAN_THEME_ADMIN_44", "عدد الأخبار في قسم آخر اخبار 24 :");
@@ -63,7 +63,7 @@ define("LAN_THEME_ADMIN_54", "مكان عرض الفيديوهات :");
 define("LAN_THEME_ADMIN_55", "تحت السلايدر ");
 define("LAN_THEME_ADMIN_56", "أسفل الصفحة ");
 define("LAN_THEME_ADMIN_57", "جانب السلايدر ");
-define("LAN_THEME_ADMIN_58", "تفعيل الفيديوهات في جانب السلايدر سيلغي ظهور قسم رئيس التحرير و ما تحته");
+define("LAN_THEME_ADMIN_58", "هاته الخاصية ليست مفعلة بعد ");
 define("LAN_THEME_ADMIN_59", "أقسام باقي الصفحة الرئيسية ");
 define("LAN_THEME_ADMIN_60", "عمود الصف الثاني  ");
 define("LAN_THEME_ADMIN_61", "عدد الأخبار في ");
@@ -84,13 +84,28 @@ define('LAN_THEME_ADMIN_75', '<a href="'.e_ADMIN_ABS.'updateadmin.php"> اضغط
 define("LAN_THEME_ADMIN_76", "إعدادات روابط  المواقع الاجتماعية ");
 define("LAN_THEME_ADMIN_77", "أدخل الروابط  الخاصة بالمواقع الاجتماعية");
 define("LAN_THEME_ADMIN_78", "أترك  الحق فارغة في حالة عدم وجود  أي رابط");
-define("LAN_THEME_ADMIN_79", "صفحتك  على  ");
+define("LAN_THEME_ADMIN_79", " رابط   ");
 define("LAN_THEME_ADMIN_80", "يمكنك استخدام المتغير التالي  ");
 define("LAN_THEME_ADMIN_81", " لعرض رابط صفحتك  على   ");
 define("LAN_THEME_ADMIN_82", "لوجو الموقع  ");
-define("LAN_THEME_ADMIN_83", "اختر الصورة  ");
+define("LAN_THEME_ADMIN_83", " اختر من القائمة   ");
 define("LAN_THEME_ADMIN_84", "رفع صورة لوجو  جديد ");
 define("LAN_THEME_ADMIN_85", "اختر لون الموقع ");
+define("LAN_THEME_ADMIN_86", "الإصدار المثبت ");
+define("LAN_THEME_ADMIN_87", "اخر إصدار متوفر");
+define("LAN_THEME_ADMIN_88", "تحديث الإصدار");
+define("LAN_THEME_ADMIN_89", "المجلد  ");
+define("LAN_THEME_ADMIN_90", " غير قابل للكتابة ، عليك  منحه التصريح 777  ");
+define("LAN_THEME_ADMIN_91", " تم  ترقية القالب بنجاح  ");
+define("LAN_THEME_ADMIN_92", " Skip to main content  ");
+define('LAN_THEME_ADMIN_93', ' أمثلة للسلايدرات المتاحة ');
+define('LAN_THEME_ADMIN_94', ' عروض النجاح هوست ');
+define('LAN_THEME_ADMIN_95', ' أختر نوع الخط الذي تريد استخدامه ');
+define('LAN_THEME_ADMIN_96', ' معلومات عن الستايل و القالب ');
+define('LAN_THEME_ADMIN_97', ' التقنيات و الادوات التالية تم استخدامها في تطوير  هذا الستايل و القالب');
+define('LAN_THEME_ADMIN_98', '  ');
+define('LAN_THEME_ADMIN_99', '');
+define('LAN_THEME_ADMIN_100', '  ');
 
 
 define("LAN_THEME_COLOR_BLUE", "الأزرق ");
@@ -102,6 +117,10 @@ define("LAN_THEME_COLOR_YELLOW", "الأصفر ");
 define("LAN_THEME_COLOR_ORANGE", "البرتقالي ");
 define("LAN_THEME_COLOR_GRIS", "الرمادي ");
 
+define("LAN_THEME_FONT_NORMAL", " عادي ");
+define("LAN_THEME_FONT_DRIODKUFI", " الكوفي الأنيق ");
+define("LAN_THEME_FONT_HELVETICANEUE", " العربي الجديد ");
+define("LAN_THEME_FONT_ARABIC", " العربي التقليدي ");
 
 define("CHAMALPRESS_3", "المزيد ... ");
 define("CHAMALPRESS_4", "عمود الصف الثاني ");
@@ -112,6 +131,8 @@ define("CHAMALPRESS_8", " ---  العمود الأيسر : ");
 
 define('LAN_THEME_ADMIN_DISABLED', 'تعطيل البلوك');
 define("LAN_THEME_ADMIN_SAVE", " حفظ ");
+
+/*
 // define('LAN_FRONTPAGE_1', 'إعدادات الصفحة الرئيسية');
 define('LAN_FRONTPAGE_2', 'تعداد عدد مشاهدات الأخبار');
 define('LAN_FRONTPAGE_3', 'إعدادات الصفحة الرئيسية');
@@ -165,7 +186,7 @@ define('LAN_FRONTPAGE_48', 'إعدادات السلايدر');
 define('LAN_FRONTPAGE_49', 'نظام الشرائح (السايدرز - sliders)');
 define('LAN_FRONTPAGE_50', 'طريقة عرض الشرائح');
 define('LAN_FRONTPAGE_51', 'تعطيل');
-
+*/
 define("LAN_VIDEO_SHOW", "عدد المشاهدات");
 
 define("ADD_COMMENT", "أضف تعليقك");

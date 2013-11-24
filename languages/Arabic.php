@@ -14,7 +14,7 @@ define("LAN_THEME_NAME", "");
 define("LAN_THEME_1", "إفرأ/أضف تعليق : ");
 define("LAN_THEME_2", "تم إلغاء التعليقات لهذا الخبر");
 define("LAN_THEME_3", "(التفاصيل ...)");
-define("LAN_THEME_4", "كاتب المقال ");
+define("LAN_THEME_4", "نشر الخبر ");
 define("LAN_THEME_5", "نشر الخبر في");
 define("LAN_THEME_6", "الموقع من تطوير و تصميم <a href='http://www.naja7host.com' rel='external'> شركة النجاح هوست </a> ، <a href='http://www.naja7host.com' rel='external'>استضافة</a> و تطوير <a href='http://www.naja7host.com' rel='external'> المواقع </a> .");
 define("LAN_THEME_7", "الرئيسية");
@@ -25,7 +25,7 @@ define("LAN_THEME_11", "اتصل بنا");
 define("LAN_THEME_12", "رابط مختر للخبر تجده هنا ");
 define("LAN_THEME_13", "عنوان الخبر");
 define("LAN_THEME_14", "آخر الأخبار");
-// define("LAN_THEME_15", "24 ساعة");
+// define("LAN_THEME_15", "أدوات الموضوع");
 define("LAN_THEME_15", "المزيد ... ");
 // define("LAN_THEME_16", "أخبار اليوم");
 define("LAN_THEME_16", "لم  يتم نشر اي خبر بعد");
@@ -51,6 +51,8 @@ define("LAN_THEME_35", "24 ساعة");
 define("LAN_THEME_36", "عدد التعليقات : ");
 define("LAN_THEME_37", "نشر الخبر  : ");
 define("LAN_THEME_38", "رابط مختصر للمقالة تجده هنا  ");
+define("LAN_THEME_39", "أدوات الموضوع  ");
+define("LAN_THEME_40", "بتاريخ ");
 
 define("LAN_VIDEO_SHOW", "عدد المشاهدات");
 

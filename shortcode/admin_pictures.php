@@ -1,4 +1,6 @@
 <?php
+if (!defined('e107_INIT')) { exit; }
+
 	require_once(e_HANDLER.'form_handler.php');
 	$rs = new form;	
 	
@@ -7,8 +9,7 @@ if (isset($_POST['frontpage_news_submit_pictures'])) {
 	$pref['frontpage_news_logo'] = $_POST['frontpage_news_logo'] ;	
 	save_prefs();
 	$result_msg = LAN_FRONTPAGE_16;
-	$result = "
-						<div class='alert alert-block alert-success'>
+	$result = "			<div class='alert alert-success'>
 							<button class='close' data-dismiss='alert' type='button'>
 								<i class='icon-remove'></i>
 							</button>
@@ -29,89 +30,58 @@ if (isset($_POST['frontpage_news_submit_upload']))
 // ===========================================================================
     $param = "frontpage_news_logo,".THEME."images/logo,".$pref['frontpage_news_logo'].",300px,150px,0,".LAN_THEME_ADMIN_83.",";
     
-	$text .= "				<li class='active'>".LAN_THEME_ADMIN_21."</li>
-						</ul><!--.breadcrumb-->
-					</div>			
-					<div id='page-content' class='clearfix'>
-					<div class='page-header position-relative'>
-						<h1>
-							".  LAN_THEME_ADMIN_12 . LAN_THEME_ADMIN_21 ."
-							<small>
-								<i class='icon-double-angle-right'></i>
-								
-							</small>
-						</h1>
-					</div><!--/.page-header-->
-					". $rs->form_open("post", e_SELF."?pictures" ,  'frontpage_news_submit_pictures', '', 'enctype="multipart/form-data"') ."
-					
-					<div class='row-fluid'>
-						". $result ."
-						<!--PAGE CONTENT BEGINS HERE-->		
-						<div class='span12'><!--Row 3 -->
-							<div class='widget-box '>
-								<div class='widget-header '>
-									<h4 class='lighter'>
-										<i class='icon-star orange'></i>
-										". LAN_THEME_ADMIN_12 . LAN_THEME_ADMIN_21 ."
-									</h4>
-									<div class='widget-toolbar'>
-										<a data-action='collapse' href='#'>
-											<i class='icon-chevron-down'></i>
-										</a>
-									</div>
-								</div>							
-								<div class='widget-body'>	
-									<div class='widget-main padding-8'>
-										<div class='border-bottom'>
-											". LAN_THEME_ADMIN_82."											
-											<div class='admin_label'> ". $tp->parseTemplate("{IMAGESELECTOR={$param}}") ."</div>
-											<div class='clearfix'>  </div>	
-										</div>											
-									</div>	
-									
-									<button class='btn btn-small btn-info no-radius button-save' name='frontpage_news_submit_pictures'>
-										<i class='icon-share-alt'></i>
-										<span class='hidden-phone'>".LAN_THEME_ADMIN_SAVE."</span>
-									</button>									
-								</div>
-							</div>
-						</div>
-						<input type='hidden' name='e-token' value='".e_TOKEN."' />
-						".$rs->form_close() .					
-						
-					$rs->form_open("post", e_SELF."?pictures" ,  'frontpage_news_submit_upload', '', 'enctype="multipart/form-data"') ."
-					
-					<div class='row-fluid'>
-						
-						<!--PAGE CONTENT BEGINS HERE-->		
-						<div class='span12'><!--Row 3 -->
-							<div class='widget-box '>
-								<div class='widget-header '>
-									<h4 class='lighter'>
-										<i class='icon-star orange'></i>
-										". LAN_THEME_ADMIN_84 ."
-									</h4>
-									<div class='widget-toolbar'>
-										<a data-action='collapse' href='#'>
-											<i class='icon-chevron-down'></i>
-										</a>
-									</div>
-								</div>							
-								<div class='widget-body'>	
-									<div class='widget-main padding-8'>
-										<div class='border-bottom'>
-											". LAN_THEME_ADMIN_82."											
-											<div class='admin_label'> <input class='tbox' type='file' name='file_userfile[]' size='40' /></div>
-											<div class='clearfix'>  </div>	
-										</div>											
-									</div>	
-									
-									<button class='btn btn-small btn-info no-radius button-save' name='frontpage_news_submit_upload'>
-										<i class='icon-share-alt'></i>
-										<span class='hidden-phone'>".LAN_THEME_ADMIN_SAVE."</span>
-									</button>									
-								</div>
-							</div>
-						</div>
-						<input type='hidden' name='e-token' value='".e_TOKEN."' />
-						".$rs->form_close();						
+	if(is_writable(THEME."images/logo"))
+	{
+		$upload_logo ="<input class='tbox' type='file' name='file_userfile[]' size='40' />";
+	} 
+	else 
+	{
+		$upload_logo ="<div class='alert alert-danger'>".LAN_THEME_ADMIN_89 ." images/logo ". LAN_THEME_ADMIN_90."</div>";
+	}	
+	
+	$text .= "	<li class='active'>".LAN_THEME_ADMIN_21."</li>
+			</ol><!--.breadcrumb-->
+			". $result ."	
+			". $rs->form_open("post", e_SELF."?pictures" ,  'frontpage_news_submit_pictures', '', 'enctype="multipart/form-data"') ."
+			<!--PAGE CONTENT BEGINS HERE-->	
+			<div class='panel panel-primary'>
+				<div class='panel-heading'><i class='icon-star orange'></i> ".  LAN_THEME_ADMIN_12 . LAN_THEME_ADMIN_21 ."</div>							
+				<div class='panel-body'>										
+					<div class='table-responsive' >
+						<table class='table  table-hover'>
+							<tr >
+								<td>". LAN_THEME_ADMIN_82." </td>
+								<td> ". $tp->parseTemplate("{IMAGESELECTOR={$param}}") ."</td>
+							</tr>				
+						</table>
+					</div><!-- end table respo -->
+					<button class='btn btn-info button-save' name='frontpage_news_submit_pictures'>
+						<span class='glyphicon glyphicon-upload'></span>
+						<span class='hidden-phone'>".LAN_THEME_ADMIN_SAVE."</span>
+					</button>												
+				</div><!-- end panel body -->
+			</div><!-- end panel -->
+			<input type='hidden' name='e-token' value='".e_TOKEN."' />
+			".$rs->form_close() .
+			
+			$rs->form_open("post", e_SELF."?pictures" ,  'frontpage_news_submit_upload', '', 'enctype="multipart/form-data"') ."
+			<div class='panel panel-primary'>
+				<div class='panel-heading'><i class='icon-star orange'></i> ".  LAN_THEME_ADMIN_84 ."</div>										
+				<div class='panel-body'>										
+					<div class='table-responsive' >
+						<table class='table  table-hover'>
+							<tr >
+								<td>". LAN_THEME_ADMIN_84 ."</td>
+								<td>".$upload_logo."</td>
+							</tr>						
+						</table>
+					</div><!-- end table respo -->
+					<button class='btn btn-info button-save' name='frontpage_news_submit_upload'>
+						<span class='glyphicon glyphicon-save'></span>
+						<span class='hidden-phone'>".LAN_THEME_ADMIN_SAVE."</span>
+					</button>												
+				</div><!-- end panel body -->
+			</div><!-- end panel -->
+			<input type='hidden' name='e-token' value='".e_TOKEN."' />
+			".$rs->form_close() ;	
+	

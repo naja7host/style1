@@ -1,4 +1,6 @@
 <?php
+if (!defined('e107_INIT')) { exit; }
+
 	require_once(e_HANDLER.'form_handler.php');
 	$rs = new form;	
 	$count = $sql->db_count("news_category");
@@ -8,6 +10,7 @@ if (isset($_POST['frontpage_news_submit_default'])) {
 	$pref['frontpage_facebook'] = $tp->todb($_POST['frontpage_facebook']);
 	// $pref['frontpage_cat_news'] = $tp->todb($_POST['frontpage_cat_news']);
 	$pref['frontpage_catnews'] = $_POST['frontpage_catnews'];
+	$pref['frontpage_catnews_limit'] = $_POST['frontpage_catnews_limit'];	
 	$pref['frontpage_news_last24'] = $tp->todb($_POST['frontpage_news_last24']);
 	$pref['frontpage_news_last24_limit'] = $tp->todb($_POST['frontpage_news_last24_limit']);
 	$pref['frontpage_box_1_limit'] = $tp->todb($_POST['frontpage_box_1_limit']);
@@ -30,8 +33,7 @@ if (isset($_POST['frontpage_news_submit_default'])) {
 	save_prefs();
 	$sql->db_Update("er_ytm_gallery", "disp_download='".$_POST['disp_download']."' ");
 	$result_msg = LAN_FRONTPAGE_16;
-	$result = "
-						<div class='alert alert-block alert-success'>
+	$result = "			<div class='alert alert-success'>
 							<button class='close' data-dismiss='alert' type='button'>
 								<i class='icon-remove'></i>
 							</button>
@@ -50,370 +52,267 @@ while($row = $sql->db_Fetch()) {
 // ===========================================================================
 	//$count = $sql->db_count("news_category");
 
-	$text .= "				<li class='active'>".LAN_THEME_ADMIN_8."</li>
-						</ul><!--.breadcrumb-->
-					</div>			
-					<div id='page-content' class='clearfix'>
-					<div class='page-header position-relative'>
-						<h1>
-							". LAN_THEME_ADMIN_40 ."
-							<small>
-								<i class='icon-double-angle-right'></i>
-								
-							</small>
-						</h1>
-					</div><!--/.page-header-->
-					". $rs->form_open("post", e_SELF."" ,  'frontpage_news_submit_default', '', 'enctype="multipart/form-data"') ."
-					<div class='row-fluid'>
-						". $result ."
-						<!--PAGE CONTENT BEGINS HERE-->		
-						<div class='span6'><!--Row 1 -->	
-							<div class='widget-box'>
-								<div class='widget-header '>
-									<h4 class='lighter'>
-										<i class='icon-star orange'></i>
-										". LAN_THEME_ADMIN_40 ."
-									</h4>
-									<div class='widget-toolbar'>
-										<a data-action='collapse' href='#'>
-											<i class='icon-chevron-down'></i>
-										</a>
-									</div>
-								</div>							
-								<div class='widget-body'>	
-									<div class='widget-main padding-8'>
-										<div class='widget-header-flat border-bottom'>
-											". LAN_THEME_ADMIN_41 ." 
-											<span class='label label-important arrowed'>". LAN_THEME_ADMIN_53C ."</span>										
-											<div class='admin_label'>
-												<input class='tbox' name='frontpage_news_slider' size='3' maxlength='3' type='text' value='".varsettrue($_POST['frontpage_news_slider'], $pref['frontpage_news_slider'])."' />
-											</div>
-											<div class='clearfix'>  </div>
-										</div>
-										<div class='border-bottom'>										
-											". LAN_THEME_ADMIN_42 ." 
-											<div class='admin_label'>";
-											
-											$text .= $rs->form_select_open('frontpage_news_last24' ) ."
-											" .$rs->form_option(LAN_THEME_ADMIN_DISABLED , "{$ch}" , 0) ;
+	$text .= "	<li class='active'>".LAN_THEME_ADMIN_8."</li>
+			</ol><!--.breadcrumb-->
+			". $result ."	
+			". $rs->form_open("post", e_SELF."" ,  'frontpage_news_submit_default', '', 'enctype="multipart/form-data"') ."
+			<!--PAGE CONTENT BEGINS HERE-->	
+			<div class='panel panel-primary'>
+				<div class='panel-heading'><i class='icon-star orange'></i> ". LAN_THEME_ADMIN_40 ."</div>							
+				<div class='panel-body'>										
+					<div class='table-responsive' >
+						<table class='table  table-hover'>
+							<tr >
+								<td>". LAN_THEME_ADMIN_41 ." <span class='label label-danger'>". LAN_THEME_ADMIN_53C ."</span></td>
+								<td><input class='tbox' name='frontpage_news_slider' size='3' maxlength='3' type='text' value='".varsettrue($_POST['frontpage_news_slider'], $pref['frontpage_news_slider'])."' /></td>
+							</tr>
+							<tr class='success'>
+								<td>". LAN_THEME_ADMIN_42 ."</td>
+								<td>";													
+							$text .= $rs->form_select_open('frontpage_news_last24' ) ."
+							" .$rs->form_option(LAN_THEME_ADMIN_DISABLED , "{$ch}" , 0) ;
+							$sql->db_Select("news_category", "*", "order by category_id", "no_where");
+							while($row = $sql->db_Fetch() )
+							{			
+								$text .= $rs->form_option($row['category_name'], ($pref['frontpage_news_last24'] == $row['category_id'] ), $row['category_id']) ;
+							} 
+							$text .= $rs->form_select_close() ;
+							
+							$text .="
+								</td>													
+							</tr>
+							<tr class='success'>
+								<td>". LAN_THEME_ADMIN_44 ."</td>
+								<td><input class='tbox' name='frontpage_news_last24_limit' size='3' maxlength='3' type='text' value='".varsettrue($_POST['frontpage_news_last24_limit'], $pref['frontpage_news_last24_limit'])."' /></td>												
+							</tr>
+							<tr >
+								<td>". LAN_THEME_ADMIN_45 ."</td>
+								<td>";										
+							$text .= $rs->form_select_open('frontpage_news_ta7rir' ) ."
+							" .$rs->form_option(LAN_THEME_ADMIN_DISABLED , "{$ch}" , 0) ;
+							$sql->db_Select("news_category", "*", "order by category_id", "no_where");
+							while($row = $sql->db_Fetch() )
+							{			
+								$text .= $rs->form_option($row['category_name'], ($pref['frontpage_news_ta7rir'] == $row['category_id'] ), $row['category_id']) ;
+							} 
+							$text .= $rs->form_select_close() ;
+							
+							$text .="
+								</td>
+							</tr>
+							<tr class='warning'>
+								<td>". LAN_THEME_ADMIN_48 ."</td>
+								<td>														
+									<label class='inline'>
+										". $rs->form_radio("frontpage_news_block2", 0 , ($pref['frontpage_news_block2']==0 ? " checked='checked'" : "") ) ."
+										<span class='lbl'> ".LAN_THEME_ADMIN_49." </span>
+									</label>
+									<label class='inline'>
+										". $rs->form_radio("frontpage_news_block2", 1 , ($pref['frontpage_news_block2']==1 ? " checked='checked'" : "") ) ."
+										<span class='lbl'> ".LAN_THEME_ADMIN_51." </span>
+									</label>	
+									<label class='inline'>
+										". $rs->form_radio("frontpage_news_block2", 2 , ($pref['frontpage_news_block2']==2 ? " checked='checked'" : "") ) ."
+										<span class='lbl'> " .LAN_THEME_ADMIN_50 ."</span>
+									</label>
+								</td>
+							</tr>
+							<tr class='warning'>
+								<td>".LAN_THEME_ADMIN_50 ."</td>
+								<td>";
+									$text .= $rs->form_select_open('frontpage_news_block2_sect' ) ."
+										" .$rs->form_option(LAN_THEME_ADMIN_DISABLED , "{$ch}" , 0) ;
+										$sql->db_Select("news_category", "*", "order by category_id", "no_where");
+										while($row = $sql->db_Fetch() )
+										{			
+											$text .= $rs->form_option($row['category_name'], ($pref['frontpage_news_block2_sect'] == $row['category_id'] ), $row['category_id']) ;
+										} 
+										$text .= $rs->form_select_close() ;													
+									$text .="
+								</td>
+							</tr>													
+							<tr class='active'>
+								<td>". LAN_THEME_ADMIN_52 ." <span class='label label-danger'>". LAN_THEME_ADMIN_53 ."</span></td>
+								<td>". $rs->form_text("disp_download", varsettrue($tp->post_toForm($_POST['disp_download']), $tp->post_toForm($disp_download)), $disp_download ) ."</td>
+							</tr>													
+							<tr class='active'>
+								<td>". LAN_THEME_ADMIN_54 ."<span class='label label-danger'>". LAN_THEME_ADMIN_58 ."</span></td>
+								<td>
+									<label class='inline'>
+										". $rs->form_radio("frontpage_news_block3", 0 , ($pref['frontpage_news_block3']==0 ? " checked='checked'" : "") ) ."
+										<span class='lbl'> ".LAN_THEME_ADMIN_55." </span>
+									</label>
+									<label class='inline'>
+										". $rs->form_radio("frontpage_news_block3", 1 , ($pref['frontpage_news_block3']==1 ? " checked='checked'" : "") ) ."
+										<span class='lbl'> ".LAN_THEME_ADMIN_56." </span>
+									</label>	
+									<label class='inline'>
+										". $rs->form_radio("frontpage_news_block3", 2 , ($pref['frontpage_news_block3']==2 ? " checked='checked'" : "") ) ."
+										<span class='lbl'> " .LAN_THEME_ADMIN_57 ."</span>
+									</label>															 
+								</td>
+							</tr>
+							<tr class='danger'>
+								<td>". LAN_THEME_ADMIN_63 ."</td>
+								<td>
+									<label class='inline'>
+									". $rs->form_checkbox("frontpage_news_showdate", 1 ,($pref['frontpage_news_showdate'] ? " checked='checked'" : "")) ."
+									<span class='lbl'>". LAN_THEME_ADMIN_64 ."</span>
+									</label>
+								</td>
+							</tr>
+							<tr  class='danger'>
+								<td>". LAN_THEME_ADMIN_66 ."</td>
+								<td>
+									<label class='inline'>
+										". $rs->form_radio("frontpage_news_datetype", 0 , ($pref['frontpage_news_datetype']==0 ? " checked='checked'" : "") ) ."
+										<span class='lbl'> ".LAN_THEME_ADMIN_67." </span>
+									</label>
+									<label class='inline'>
+										". $rs->form_radio("frontpage_news_datetype", 1 , ($pref['frontpage_news_datetype']==1 ? " checked='checked'" : "") ) ."
+										<span class='lbl'> ".LAN_THEME_ADMIN_68." </span>
+									</label>	
+								</td>
+							</tr>
+							<!--
+							<tr >
+								<td>". LAN_THEME_ADMIN_41 ." <span class='label label-danger'>". LAN_THEME_ADMIN_53C ."</span></td>
+								<td><input class='tbox' name='frontpage_news_slider' size='3' maxlength='3' type='text' value='".varsettrue($_POST['frontpage_news_slider'], $pref['frontpage_news_slider'])."' /></td>
+							</tr>													<tr >
+								<td>". LAN_THEME_ADMIN_41 ." <span class='label label-danger'>". LAN_THEME_ADMIN_53C ."</span></td>
+								<td><input class='tbox' name='frontpage_news_slider' size='3' maxlength='3' type='text' value='".varsettrue($_POST['frontpage_news_slider'], $pref['frontpage_news_slider'])."' /></td>
+							</tr>
+							-->
+						</table>
+					</div><!-- end table respo -->
+					<button class='btn btn-info button-save' name='frontpage_news_submit_default'>
+						<span class='glyphicon glyphicon-save'></span>
+						<span class='hidden-phone'>".LAN_THEME_ADMIN_SAVE."</span>
+					</button>												
+				</div><!-- end panel body -->
+			</div><!-- end panel -->
+			
+			<div class=' clearfix'>  </div>						
+			<div class='hr hr32 hr-dotted '></div>
+			
+			<div class='panel panel-primary'>
+				<div class='panel-heading'><i class='icon-star orange'></i> ". LAN_THEME_ADMIN_59 ."</div>							
+				<div class='panel-body'>										
+					<div class='table-responsive' >
+						<table class='table  table-hover'>	
+							<tr class='active'>
+								<td>". LAN_THEME_ADMIN_60 ."</td>
+								<td>";
+									for ($i=1 ; $i<4 ; $i++) 
+									{
+										$text .= $rs->form_select_open('frontpage_box_'.$i.'' ) ."
+										" .$rs->form_option(LAN_THEME_ADMIN_DISABLED , "{$ch}" , 0) ;
+										$sql->db_Select("news_category", "*", "order by category_id", "no_where");
+										while($row = $sql->db_Fetch() )
+										{
+											$text .= $rs->form_option($row['category_name'], ($pref['frontpage_box_'.$i.''] == $row['category_id'] ), $row['category_id']) ;
+										} 
+										$text .= $rs->form_select_close() ;
+									}											
+									$text .= "
+								</td>
+							</tr>
+							<tr  class='active'>
+								<td>". LAN_THEME_ADMIN_61 . LAN_THEME_ADMIN_60 ." </td>
+								<td>". $rs->form_text("frontpage_box_1_limit", 3, varsettrue($tp->post_toForm($_POST['frontpage_box_1_limit']), $tp->post_toForm($pref['frontpage_box_1_limit'])), 3 ) ."</td>
+							</tr>
+							<tr  class='warning'>
+								<td>". LAN_THEME_ADMIN_62 ."  </td>
+								<td>" ;																				
+									$i = 0;
+									while($i <= $count)
+										{
+											$text .= $rs->form_select_open('frontpage_catnews[]') ."
+											" .$rs->form_option(LAN_THEME_ADMIN_DISABLED , "" , "") ;
 											$sql->db_Select("news_category", "*", "order by category_id", "no_where");
-											while($row = $sql->db_Fetch() )
-											{			
-												$text .= $rs->form_option($row['category_name'], ($pref['frontpage_news_last24'] == $row['category_id'] ), $row['category_id']) ;
-											} 
-											$text .= $rs->form_select_close() ;
-											
-											$text .="</div>
-											<div class='clearfix'>  </div>
-										</div>
-										<div class='widget-header-flat border-bottom'>										
-											". LAN_THEME_ADMIN_44 ."
-											<div class='admin_label'>
-												<input class='tbox' name='frontpage_news_last24_limit' size='3' maxlength='3' type='text' value='".varsettrue($_POST['frontpage_news_last24_limit'], $pref['frontpage_news_last24_limit'])."' />
-											</div>
-											<div class='clearfix'>  </div>
-										</div>
-										<div class='border-bottom'>										
-											". LAN_THEME_ADMIN_45 ."
-											<div class='admin_label'>";										
-											$text .= $rs->form_select_open('frontpage_news_ta7rir' ) ."
-											" .$rs->form_option(LAN_THEME_ADMIN_DISABLED , "{$ch}" , 0) ;
-											$sql->db_Select("news_category", "*", "order by category_id", "no_where");
-											while($row = $sql->db_Fetch() )
-											{			
-												$text .= $rs->form_option($row['category_name'], ($pref['frontpage_news_ta7rir'] == $row['category_id'] ), $row['category_id']) ;
-											} 
-											$text .= $rs->form_select_close() ;
-											
-											$text .="</div>
-											<div class='clearfix'>  </div>
-										</div>
-										<div class='widget-header-flat border-bottom'>									
-											". LAN_THEME_ADMIN_48 ."
-											<div class='admin_label'>
-												<label class='inline'>
-													". $rs->form_radio("frontpage_news_block2", 0 , ($pref['frontpage_news_block2']==0 ? " checked='checked'" : "") ) ."
-													<span class='lbl'> ".LAN_THEME_ADMIN_49." </span>
-												</label>
-												<label class='inline'>
-													". $rs->form_radio("frontpage_news_block2", 1 , ($pref['frontpage_news_block2']==1 ? " checked='checked'" : "") ) ."
-													<span class='lbl'> ".LAN_THEME_ADMIN_51." </span>
-												</label>	
-												<label class='inline'>
-													". $rs->form_radio("frontpage_news_block2", 2 , ($pref['frontpage_news_block2']==2 ? " checked='checked'" : "") ) ."
-													<span class='lbl'> " .LAN_THEME_ADMIN_50 ."</span>
-												</label>										
-											</div>
-											<div class='clearfix'>  </div>
-										</div>
-										<div class='border-bottom'>									
-											".LAN_THEME_ADMIN_50 ."
-											<div class='admin_label'>
-												<label class='inline'>
-													<span class='lbl'> "  ;
-													$text .= $rs->form_select_open('frontpage_news_block2_sect' ) ."
-														" .$rs->form_option(LAN_THEME_ADMIN_DISABLED , "{$ch}" , 0) ;
-														$sql->db_Select("news_category", "*", "order by category_id", "no_where");
-														while($row = $sql->db_Fetch() )
-														{			
-															$text .= $rs->form_option($row['category_name'], ($pref['frontpage_news_block2_sect'] == $row['category_id'] ), $row['category_id']) ;
-														} 
-														$text .= $rs->form_select_close() ;
-											
-													$text .="
-													</span>
-												</label>											
-											</div>
-											<div class='clearfix'>  </div>
-										</div>	
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class='span6'><!--Row 2 -->
-							<div class='widget-box transparent '>
-								<div class='widget-header widget-header-flat'>
-									<h4 class='lighter'>
-										<i class='icon-star orange'></i>
-										". LAN_THEME_ADMIN_11 ."
-									</h4>
-									<div class='widget-toolbar'>
-										<a data-action='collapse' href='#'>
-											<i class='icon-chevron-down'></i>
-										</a>
-									</div>
-								</div>
-								<div class='widget-body'>	
-									<div class='widget-main padding-8'>	
-										<div class='widget-header-flat border-bottom'>									
-											". LAN_THEME_ADMIN_52 ."
-											<span class='label label-important arrowed'>". LAN_THEME_ADMIN_53 ."</span>
-											<div class='admin_label'>
-												". $rs->form_text("disp_download", varsettrue($tp->post_toForm($_POST['disp_download']), $tp->post_toForm($disp_download)), $disp_download ) ."</div>
-											<div class='clearfix'>  </div>	
-										</div>
-										<div class='border-bottom'>										
-											". LAN_THEME_ADMIN_54 ."
-											<div class='admin_label'>
-												<label class='inline'>
-													". $rs->form_radio("frontpage_news_block3", 0 , ($pref['frontpage_news_block3']==0 ? " checked='checked'" : "") ) ."
-													<span class='lbl'> ".LAN_THEME_ADMIN_55." </span>
-												</label>
-												<label class='inline'>
-													". $rs->form_radio("frontpage_news_block3", 1 , ($pref['frontpage_news_block3']==1 ? " checked='checked'" : "") ) ."
-													<span class='lbl'> ".LAN_THEME_ADMIN_56." </span>
-												</label>	
-												<label class='inline'>
-													". $rs->form_radio("frontpage_news_block3", 2 , ($pref['frontpage_news_block3']==2 ? " checked='checked'" : "") ) ."
-													<span class='lbl'> " .LAN_THEME_ADMIN_57 ."</span>
-												</label>
-											</div>
-											<span class='label label-warning arrowed '><b>". LAN_THEME_ADMIN_58 ."</b></span>											
-											<div class='clearfix'>  </div>
-										</div>
-										<div class='widget-header-flat border-bottom'>									
-											". LAN_THEME_ADMIN_63 ."
-											<div class='admin_label'>
-												<label class='inline'>
-												". $rs->form_checkbox("frontpage_news_showdate", 1 ,($pref['frontpage_news_showdate'] ? " checked='checked'" : "")) ."
-												<span class='lbl'>". LAN_THEME_ADMIN_64 ."</span>
-												</label>
-											</div>	
-											<div class='clearfix'>  </div>	
-										</div>
-										<div class='border-bottom'>										
-											". LAN_THEME_ADMIN_66 ."
-											<div class='admin_label'>
-												<label class='inline'>
-													". $rs->form_radio("frontpage_news_datetype", 0 , ($pref['frontpage_news_datetype']==0 ? " checked='checked'" : "") ) ."
-													<span class='lbl'> ".LAN_THEME_ADMIN_67." </span>
-												</label>
-												<label class='inline'>
-													". $rs->form_radio("frontpage_news_datetype", 1 , ($pref['frontpage_news_datetype']==1 ? " checked='checked'" : "") ) ."
-													<span class='lbl'> ".LAN_THEME_ADMIN_68." </span>
-												</label>	
-											</div>
-											<div class='clearfix'>  </div>
-										</div>										
-									</div>
-								</div>	
-							</div>	
-						</div>	
-						<div class=' clearfix'>  </div>
-						<button class='btn btn-small btn-info no-radius button-save' name='frontpage_news_submit_default'>
-							<i class='icon-share-alt'></i>
-							<span class='hidden-phone'>".LAN_THEME_ADMIN_SAVE."</span>
-						</button>							
-						<div class='hr hr32 hr-dotted '></div>
-						
-						<div class='span12'><!--Row 3 -->
-							<div class='widget-box '>
-								<div class='widget-header '>
-									<h4 class='lighter'>
-										<i class='icon-star orange'></i>
-										". LAN_THEME_ADMIN_59 ."
-									</h4>
-									<div class='widget-toolbar'>
-										<a data-action='collapse' href='#'>
-											<i class='icon-chevron-down'></i>
-										</a>
-									</div>
-								</div>							
-								<div class='widget-body'>	
-									<div class='widget-main padding-8'>		
-										<div class='widget-header-flat border-bottom'>
-											". LAN_THEME_ADMIN_60 ."
-											<div class='admin_label'> ";
-												for ($i=1 ; $i<4 ; $i++) 
-												{
-													$text .= $rs->form_select_open('frontpage_box_'.$i.'' ) ."
-													" .$rs->form_option(LAN_THEME_ADMIN_DISABLED , "{$ch}" , 0) ;
-													$sql->db_Select("news_category", "*", "order by category_id", "no_where");
-													while($row = $sql->db_Fetch() )
-													{
-														$text .= $rs->form_option($row['category_name'], ($pref['frontpage_box_'.$i.''] == $row['category_id'] ), $row['category_id']) ;
-													} 
-													$text .= $rs->form_select_close() ;
-												}											
-											$text .= "</div>
-											<div class='clearfix'>  </div>
-										</div>	
-										<div class='border-bottom'>
-											". LAN_THEME_ADMIN_61 . LAN_THEME_ADMIN_60 ." 
-											<div class='admin_label'> ". $rs->form_text("frontpage_box_1_limit", 3, varsettrue($tp->post_toForm($_POST['frontpage_box_1_limit']), $tp->post_toForm($pref['frontpage_box_1_limit'])), 3 ) ."</div>
-											<div class='clearfix'>  </div>	
-										</div>
-										<div class='widget-header-flat border-bottom'>
-											". LAN_THEME_ADMIN_62 ." 
-											<div class='admin_label'> " ;																				
-												$i = 0;
-												while($i <= $count)
-													{
-														$text .= $rs->form_select_open('frontpage_catnews[]') ."
-														" .$rs->form_option(LAN_THEME_ADMIN_DISABLED , "" , "") ;
-														$sql->db_Select("news_category", "*", "order by category_id", "no_where");
 
-														while($row = $sql->db_Fetch() )
-														{			
-															$ch = ($row['category_id'] == $pref['frontpage_catnews'][$i] ? "selected" : '');
-															$text .= $rs->form_option($row['category_name'], $ch , $row['category_id']) ;
-														}
-														$text .= $rs->form_select_close() ;
-														if ($i % 2)
-														{
-														   $text .= "<br /> ";
-														}
-														$i++;													
-													} ;													
-												$text .="
-											</div>
-											<div class='clearfix'>  </div>	
-										</div>	
-										<div class='border-bottom'>
-											". LAN_THEME_ADMIN_61 . LAN_THEME_ADMIN_62 ."
-											<span class='label label-important arrowed'>". LAN_THEME_ADMIN_53B ."</span>											
-											<div class='admin_label'> ". $rs->form_text("frontpage_catnews_limit", 3, varsettrue($tp->post_toForm($_POST['frontpage_catnews_limit']), $tp->post_toForm($pref['frontpage_catnews_limit'])), 3 ) ."</div>
-											<div class='clearfix'>  </div>	
-										</div>	
-										<div class='widget-header-flat border-bottom'>
-											". LAN_THEME_ADMIN_65 ."
-											<div class='admin_label'> ";
-												for ($i=4 ; $i<7 ; $i++) 
-												{
-													$text .= $rs->form_select_open('frontpage_box_'.$i.'' ) ."
-													" .$rs->form_option(LAN_THEME_ADMIN_DISABLED , "{$ch}" , 0) ;
-													$sql->db_Select("news_category", "*", "order by category_id", "no_where");
-													while($row = $sql->db_Fetch() )
-													{
-														$text .= $rs->form_option($row['category_name'], ($pref['frontpage_box_'.$i.''] == $row['category_id'] ), $row['category_id']) ;
-													} 
-													$text .= $rs->form_select_close() ;
-												}											
-											$text .= "</div>
-											<div class='clearfix'>  </div>
-										</div>
-										<div class=' border-bottom'>
-											". LAN_THEME_ADMIN_61 . LAN_THEME_ADMIN_65 ."
-											<div class='admin_label'> ". $rs->form_text("frontpage_box_2_limit", 3, varsettrue($tp->post_toForm($_POST['frontpage_box_2_limit']), $tp->post_toForm($pref['frontpage_box_2_limit'])), 3 ) ."</div>
-											<div class='clearfix'>  </div>	
-										</div>											
-									</div>
-									<button class='btn btn-small btn-info no-radius button-save' name='frontpage_news_submit_default'>
-										<i class='icon-share-alt'></i>
-										<span class='hidden-phone'>".LAN_THEME_ADMIN_SAVE."</span>
-									</button>									
-								</div>
-							</div>
-						</div>
-						<div class='span6'><!--Row 3 -->	
-							<div class='widget-box'>
-								<div class='widget-header '>
-									<h4 class='lighter'>
-										<i class='icon-star orange'></i>
-										". LAN_THEME_ADMIN_69 ."
-									</h4>
-									<div class='widget-toolbar'>
-										<a data-action='collapse' href='#'>
-											<i class='icon-chevron-down'></i>
-										</a>
-									</div>
-								</div>							
-								<div class='widget-body'>	
-									<div class='widget-main padding-8'>
-										<div class='widget-header-flat border-bottom'>
-											". LAN_THEME_ADMIN_70 ." 
-											<div class='admin_label'>
-												<span class='label label-important arrowed'>". LAN_THEME_ADMIN_71 ."</span>										
-											</div>
-											<div class='clearfix'>  </div>
-										</div>
-										<div class='border-bottom'>									
-											".LAN_THEME_ADMIN_72 ."
-											<div class='admin_label'>
-												<label class='inline'>
-													<span class='lbl'> "  ;
-													$text .= $rs->form_select_open('frontpage_news_caricature' ) ."
-														" .$rs->form_option(LAN_THEME_ADMIN_DISABLED , "{$ch}" , 0) ;
-														$sql->db_Select("news_category", "*", "order by category_id", "no_where");
-														while($row = $sql->db_Fetch() )
-														{			
-															$text .= $rs->form_option($row['category_name'], ($pref['frontpage_news_caricature'] == $row['category_id'] ), $row['category_id']) ;
-														} 
-														$text .= $rs->form_select_close() ;
-											
-													$text .="
-													</span>
-												</label>											
-											</div>
-											<div class='clearfix'>  </div>
-										</div>	
-										<div class='border-bottom'>									
-											".LAN_THEME_ADMIN_73 ."
-											<div class='admin_label'>
-												<label class='inline'>
-													<span class='lbl'> "  ;
-													$text .= $rs->form_select_open('frontpage_news_photograph' ) ."
-														" .$rs->form_option(LAN_THEME_ADMIN_DISABLED , "{$ch}" , 0) ;
-														$sql->db_Select("news_category", "*", "order by category_id", "no_where");
-														while($row = $sql->db_Fetch() )
-														{			
-															$text .= $rs->form_option($row['category_name'], ($pref['frontpage_news_photograph'] == $row['category_id'] ), $row['category_id']) ;
-														} 
-														$text .= $rs->form_select_close() ;
-											
-													$text .="
-													</span>
-												</label>											
-											</div>
-											<div class='clearfix'>  </div>
-										</div>										
-									</div>
-								</div>
-							</div>
-						</div>					
-					</div>
-					<input type='hidden' name='e-token' value='".e_TOKEN."' />
-		";
+											while($row = $sql->db_Fetch() )
+											{			
+												$ch = ($row['category_id'] == $pref['frontpage_catnews'][$i] ? "selected" : '');
+												$text .= $rs->form_option($row['category_name'], $ch , $row['category_id']) ;
+											}
+											$text .= $rs->form_select_close() ;
+											if ($i % 2)
+											{
+											   $text .= "<br /> ";
+											}
+											$i++;													
+										} ;													
+									$text .="
+								</td>
+							</tr>	
+							<tr  class='warning'>
+								<td>". LAN_THEME_ADMIN_61 . LAN_THEME_ADMIN_62 ." <span class='label label-danger'>". LAN_THEME_ADMIN_53B ."</span></td>
+								<td>". $rs->form_text("frontpage_catnews_limit", 3, varsettrue($tp->post_toForm($_POST['frontpage_catnews_limit']), $tp->post_toForm($pref['frontpage_catnews_limit'])), 3 ) ."</td>
+							</tr>
+							<tr  class='danger'>
+								<td>". LAN_THEME_ADMIN_65 ."</td>
+								<td>";
+									for ($i=4 ; $i<7 ; $i++) 
+									{
+										$text .= $rs->form_select_open('frontpage_box_'.$i.'' ) ."
+										" .$rs->form_option(LAN_THEME_ADMIN_DISABLED , "{$ch}" , 0) ;
+										$sql->db_Select("news_category", "*", "order by category_id", "no_where");
+										while($row = $sql->db_Fetch() )
+										{
+											$text .= $rs->form_option($row['category_name'], ($pref['frontpage_box_'.$i.''] == $row['category_id'] ), $row['category_id']) ;
+										} 
+										$text .= $rs->form_select_close() ;
+									}											
+									$text .= "
+								</td>
+							</tr>	
+							<tr  class='danger'>
+								<td>". LAN_THEME_ADMIN_61 . LAN_THEME_ADMIN_65 ."</td>
+								<td>". $rs->form_text("frontpage_box_2_limit", 3, varsettrue($tp->post_toForm($_POST['frontpage_box_2_limit']), $tp->post_toForm($pref['frontpage_box_2_limit'])), 3 ) ."</td>
+							</tr>
+							<tr  >
+								<td>". LAN_THEME_ADMIN_70 ." </td>
+								<td><span class='label label-danger'>". LAN_THEME_ADMIN_71 ."</span></td>
+							</tr>	
+							<tr  class='success'>
+								<td>".LAN_THEME_ADMIN_73 ." </td>
+								<td>";
+									$text .= $rs->form_select_open('frontpage_news_photograph' ) ."
+										" .$rs->form_option(LAN_THEME_ADMIN_DISABLED , "{$ch}" , 0) ;
+										$sql->db_Select("news_category", "*", "order by category_id", "no_where");
+										while($row = $sql->db_Fetch() )
+										{			
+											$text .= $rs->form_option($row['category_name'], ($pref['frontpage_news_photograph'] == $row['category_id'] ), $row['category_id']) ;
+										} 
+										$text .= $rs->form_select_close() ;
+							
+									$text .="
+								</td>
+							</tr>										
+							<tr  class='success'>
+								<td>".LAN_THEME_ADMIN_72 ." </td>
+								<td>";
+									$text .= $rs->form_select_open('frontpage_news_caricature' ) ."
+									" .$rs->form_option(LAN_THEME_ADMIN_DISABLED , "{$ch}" , 0) ;
+									$sql->db_Select("news_category", "*", "order by category_id", "no_where");
+									while($row = $sql->db_Fetch() )
+									{			
+										$text .= $rs->form_option($row['category_name'], ($pref['frontpage_news_caricature'] == $row['category_id'] ), $row['category_id']) ;
+									} 
+									$text .= $rs->form_select_close() ;													
+									$text .="
+								</td>
+							</tr>								
+						</table>
+					</div><!-- end table respo -->
+					<button class='btn btn-info button-save' name='frontpage_news_submit_default'>
+						<span class='glyphicon glyphicon-save'></span>
+						<span class='hidden-phone'>".LAN_THEME_ADMIN_SAVE."</span>
+					</button>												
+				</div><!-- end panel body -->
+			</div><!-- end panel -->
+			<input type='hidden' name='e-token' value='".e_TOKEN."' />";
 		
 	$text .= $rs->form_close();
 		//echo $tp->post_toForm($_POST['frontpage_facebook']) ;
@@ -434,11 +333,11 @@ while($row = $sql->db_Fetch()) {
 						</h1>
 					</div><!--/.page-header-->
 
-					<div class="row-fluid">
+					<div class="row">
 						<!--PAGE CONTENT BEGINS HERE-->
 
-						<div class="row-fluid">
-							<div class="span6">
+						<div class="row">
+							<div class="col-md-12 ">
 								<h4>Headings & Paragraphs</h4>
 
 								<hr />
@@ -459,7 +358,7 @@ while($row = $sql->db_Fetch()) {
 								<h6>h6. Heading 6</h6>
 							</div><!--/span-->
 
-							<div class="span6">
+							<div class="col-md-12 ">
 								<div class="widget-box">
 									<div class="widget-header widget-header-flat">
 										<h4>Lists</h4>
@@ -467,8 +366,8 @@ while($row = $sql->db_Fetch()) {
 
 									<div class="widget-body">
 										<div class="widget-main">
-											<div class="row-fluid">
-												<div class="span6">
+											<div class="row">
+												<div class="col-md-12 ">
 													<ul>
 														<li>Unordered List Item # 1</li>
 
@@ -495,7 +394,7 @@ while($row = $sql->db_Fetch()) {
 													</ul>
 												</div>
 
-												<div class="span6">
+												<div class="col-md-12 ">
 													<ol>
 														<li>Ordered List Item # 1</li>
 														<li class="text-info">.text-info Ordered List Item</li>
@@ -512,7 +411,7 @@ while($row = $sql->db_Fetch()) {
 											</div>
 
 											<hr />
-											<div class="row-fluid">
+											<div class="row">
 												<div class="span12">
 													<ul class="unstyled spaced">
 														<li>
@@ -572,7 +471,7 @@ while($row = $sql->db_Fetch()) {
 						</div>
 
 						<hr />
-						<div class="row-fluid">
+						<div class="row">
 							<div class="span4">
 								<div class="widget-box">
 									<div class="widget-header widget-header-flat">
@@ -581,7 +480,7 @@ while($row = $sql->db_Fetch()) {
 
 									<div class="widget-body">
 										<div class="widget-main">
-											<div class="row-fluid">
+											<div class="row">
 												<blockquote class="pull-right">
 													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
 
@@ -626,7 +525,7 @@ while($row = $sql->db_Fetch()) {
 							</div>
 
 							<div class="span8">
-								<div class="row-fluid">
+								<div class="row">
 									<div class="widget-box">
 										<div class="widget-header widget-header-flat">
 											<h4>Definition List</h4>
@@ -665,7 +564,7 @@ while($row = $sql->db_Fetch()) {
 
 								<div class="space-6"></div>
 
-								<div class="row-fluid">
+								<div class="row">
 									<div class="widget-box">
 										<div class="widget-header widget-header-flat">
 											<h4>Code view</h4>

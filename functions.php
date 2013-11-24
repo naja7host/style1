@@ -2,7 +2,146 @@
 
 if (!defined('e107_INIT')) { exit; }
 
-define('FONTS', "font");
+
+class style1 {
+	
+	public function get_new_version() 
+	{
+		global $themeversion ;
+		//var_dump($themeversion);
+		//$version = $themeversion;
+		$update = "";
+		
+		// 
+		$raw_response =  file_get_contents('https://raw.github.com/naja7host/style1/master/README.md');
+		
+		if ( !$raw_response  )
+			return $version = "	<tr class='danger' >
+									<td>". LAN_THEME_ADMIN_87."	</td>
+									<td>N/A</td>
+								</tr>";
+
+		preg_match( '#^\s*`*~Current Version\:\s*([^~]*)~#im', $raw_response, $__version );
+
+		if ( isset( $__version[1] ) ) {
+			$version_readme = $__version[1];
+			if (-1 == version_compare( $themeversion, $version_readme ) ) 
+			{
+				$class ="class='success'";
+				$version = $version_readme;
+				
+				$update ="			
+									<button class='btn btn-primary button-save btn-xs' name='frontpage_news_submit_update_theme'>
+										<span class='glyphicon glyphicon-import'></span>
+										<span class='hidden-phone'>".LAN_THEME_ADMIN_88."</span>
+									</button>";												
+			}
+			else 
+			{
+				$class ="";
+				$version = $version_readme;
+				$update ="			<button class='btn btn-default button-save btn-xs'  disabled='disabled' name='frontpage_news_submit_update_theme'>
+										<span class='glyphicon glyphicon-stop'></span>
+										<span class='hidden-phone'>".LAN_THEME_ADMIN_88."</span>
+									</button>";
+			}			
+		}
+
+		// Refresh every 6 hours
+		// To be Added next release
+		
+		return "				<tr ".$class.">
+									<td>". LAN_THEME_ADMIN_87."	</td>
+									<td>". $version . $update ."</td>
+								</tr>";
+	}		
+	
+	/**
+	 * Get Headers function
+	 * @param str #url
+	 * @return array
+	 */
+	public function getHeaders($url)
+	{
+		$ch = curl_init($url);
+		curl_setopt( $ch, CURLOPT_NOBODY, true );
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, false );
+		curl_setopt( $ch, CURLOPT_HEADER, false );
+		curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
+		curl_setopt( $ch, CURLOPT_MAXREDIRS, 3 );
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);		
+		curl_exec( $ch );
+		$headers = curl_getinfo( $ch );
+		curl_close( $ch );
+
+		return $headers;
+	}	
+
+	/**
+	 * Download
+	 * @param str $url, $path
+	 * @return bool || void
+	 */
+	public function download($url, $path)
+	{
+		# open file to write
+		$fp = fopen ($path, 'w+');
+		# start curl
+		$ch = curl_init();
+		curl_setopt( $ch, CURLOPT_URL, $url );
+		# set return transfer to false
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, false );
+		curl_setopt( $ch, CURLOPT_BINARYTRANSFER, false );
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);				
+		# increase timeout to download big file
+		curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 10 );
+		# write data to local file
+		// curl_setopt( $ch, CURLOPT_FILE, $fp );
+		
+		# execute curl
+		$data = curl_exec( $ch );
+		file_put_contents($path, $data);	
+		# close curl
+		curl_close( $ch );
+		# close local file
+		fclose( $fp );
+
+		if (filesize($path) > 0) return true;
+	}
+	
+	public function download_file ($url, $path)
+	{
+
+		$newfilename = $path;
+		$file = fopen ($url, "rb");
+		if ($file) 
+		{
+			$newfile = fopen ($newfilename, "wb");
+			if ($newfile)
+			while(!feof($file)) 
+			{
+			  fwrite($newfile, fread($file, 1024 * 8 ), 1024 * 8 );
+			}
+		}
+		if ($file) 
+		{
+			fclose($file);
+		}
+		if ($newfile) 
+		{
+			fclose($newfile);
+		}
+	}	
+}
+
+
+if ($pref['frontpage_news_fonts'])
+	define('FONTS', $pref['frontpage_news_fonts']);
+else
+	define('FONTS', "normal");
+	
 define('ADMINTOOLS', false);
 
 //XXX XURL Definitions. 
@@ -60,6 +199,7 @@ else
 	define('XURL_INSTAGRAM', false);
 	define('XURL_RSS', e_PLUGIN ."rss_menu/rss.php");
 }
+
 if ($pref['frontpage_news_colorstyle'])
 	define('COLORSTYLE', $pref['frontpage_news_colorstyle']);
 else
@@ -121,19 +261,5 @@ if(!$pref['frontpage_news_datetype'])
 if(!$pref['frontpage_news_shorturl'])
 	$pref['frontpage_news_shorturl'] = true;	
 	
-// $pref['frontpage_news_ta7rir'] ;	
-// $pref['track_online']
-//$pref['frontpage_cat_news']  = 2 ; 
-// $pref['frontpage_cat_news'] = ;
-
-// $pref['frontpage_news_ta7rir']
-// $pref['frontpage_news_block2']
-// $pref['frontpage_news_block2_sect']
-// $pref['frontpage_video_limit']
-// $pref['frontpage_news_block3']
-// $pref['frontpage_box_1']
-// $pref['frontpage_box_2']
-// $pref['frontpage_box_3']
-// $pref['frontpage_box_1_limit']
 
 ?>
